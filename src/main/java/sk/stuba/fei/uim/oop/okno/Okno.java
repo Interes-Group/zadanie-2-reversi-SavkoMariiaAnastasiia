@@ -5,13 +5,28 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Okno extends Hra {
-
-    public int rozmer = 0;
-
+    public int rozmer = 6;
+    private int stlbec = 250;
+    private int riadok = 50;
     public Okno(){
         JFrame frame=new JFrame("Reverse");
         final JTextField tf=new JTextField();
         tf.setBounds(50,50, 200,30);
+
+
+        for (int i=0;i<rozmer;i++){
+            stlbec=stlbec+37;
+            riadok = 50;
+            for (int j=0;j<rozmer;j++){
+                JPanel poli=new JPanel();
+                poli.setBounds(stlbec,riadok,35,35);
+                poli.setBackground(new Color(236, 117, 46));
+                riadok=riadok+37;
+                frame.add(poli);
+
+            }
+
+        }
 
         JPanel panel=new JPanel();
         panel.setBounds(40,30,200,500);
@@ -57,21 +72,25 @@ public class Okno extends Hra {
         bg.add(r1);bg.add(r2);bg.add(r3);bg.add(r4);
         r1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                rozmer = 6;
                 l2.setText("Rozmer:  6");
             }
         });
         r2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                rozmer = 8;
                 l2.setText("Rozmer:  8");
             }
         });
         r3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                rozmer = 10;
                 l2.setText("Rozmer:  10");
             }
         });
         r4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                rozmer = 12;
                 l2.setText("Rozmer:  12");
             }
         });
@@ -79,6 +98,7 @@ public class Okno extends Hra {
         JLabel vin=new JLabel("Vyhral :");
         vin.setForeground(new Color(236, 117, 46));
         vin.setBounds(50,400, 100,30);
+
 
         frame.getContentPane().setBackground(new Color(30, 30, 30));
         frame.add(l1);
@@ -97,8 +117,7 @@ public class Okno extends Hra {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
     }
 
-
 }
+
