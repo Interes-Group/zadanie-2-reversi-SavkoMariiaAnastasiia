@@ -5,28 +5,18 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Okno extends Hra {
+    public void setRozmer(int rozmer) {
+        this.rozmer = rozmer;
+    }
+
     public int rozmer = 6;
     private int stlbec = 250;
     private int riadok = 50;
+    JFrame frame=new JFrame("Reverse");
     public Okno(){
-        JFrame frame=new JFrame("Reverse");
         final JTextField tf=new JTextField();
         tf.setBounds(50,50, 200,30);
-
-
-        for (int i=0;i<rozmer;i++){
-            stlbec=stlbec+37;
-            riadok = 50;
-            for (int j=0;j<rozmer;j++){
-                JPanel poli=new JPanel();
-                poli.setBounds(stlbec,riadok,35,35);
-                poli.setBackground(new Color(236, 117, 46));
-                riadok=riadok+37;
-                frame.add(poli);
-
-            }
-
-        }
+        desk();
 
         JPanel panel=new JPanel();
         panel.setBounds(40,30,200,500);
@@ -73,25 +63,33 @@ public class Okno extends Hra {
         r1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rozmer = 6;
+                setRozmer(rozmer);
                 l2.setText("Rozmer:  6");
+                desk();
             }
         });
         r2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rozmer = 8;
+                setRozmer(rozmer);
                 l2.setText("Rozmer:  8");
+                desk();
             }
         });
         r3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rozmer = 10;
+                setRozmer(rozmer);
                 l2.setText("Rozmer:  10");
+                desk();
             }
         });
         r4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rozmer = 12;
+                setRozmer(rozmer);
                 l2.setText("Rozmer:  12");
+                desk();
             }
         });
 
@@ -117,6 +115,22 @@ public class Okno extends Hra {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
+    private void desk(){
+        int currnt=stlbec;
+        for (int i=0;i<rozmer;i++){
+            currnt=currnt+37;
+            riadok = 50;
+            for (int j=0;j<rozmer;j++){
+                JPanel poli=new JPanel();
+                poli.setBounds(currnt,riadok,35,35);
+                poli.setBackground(new Color(236, 117, 46));
+                riadok=riadok+37;
+                frame.add(poli);
+
+            }
+            frame.repaint();
+        }
     }
 
 }
