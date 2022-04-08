@@ -11,7 +11,7 @@ public class Okno extends Pole {
         this.GenPole();
 
         JPanel panel=new JPanel();
-        panel.setBounds(40,30,200,500);
+        panel.setBounds(40,30,200,550);
         panel.setBackground(new Color(47, 40, 39));
 
         JButton button=new JButton("Reset");
@@ -67,7 +67,7 @@ public class Okno extends Pole {
         frame.add(button);
         frame.add(vin);
         frame.add(panel);
-        frame.setBounds(400,50,800,600);
+        frame.setBounds(400,50,850,650);
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
