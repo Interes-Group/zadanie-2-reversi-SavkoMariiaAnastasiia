@@ -43,17 +43,22 @@ public class Okno extends Pole {
             r1.setForeground(new Color(236, 117, 46));
             r1.setBackground(new Color(47, 40, 39));
             frame.add(r1);
-            y=y+20;
+            y+=20;
             bg.add(r1);
-            r1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            r1.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
                 rozmer = k;
                 setRozmer(rozmer);
-                l2.setText("Rozmer:  "+k);
-                Okno.this.GenPole();
             }
         });
         }
+
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                l2.setText("Rozmer:  " + rozmer);
+                Okno.this.GenPole();
+            }
+        });
+
         JLabel vin=new JLabel("Vyhral :");
         vin.setForeground(new Color(236, 117, 46));
         vin.setBounds(50,400, 100,30);

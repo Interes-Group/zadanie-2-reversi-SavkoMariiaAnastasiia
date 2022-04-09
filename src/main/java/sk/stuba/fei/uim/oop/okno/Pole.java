@@ -23,44 +23,41 @@ public class Pole extends Hra implements ActionListener, MouseListener {
     public int riadok = 50;
     public int x;
     public int y;
-    public int x1;
-    public int y1;
-    JPanel poli=new JPanel();
+    Kamne poli;
+    JPanel pole_prehru = new JPanel();
     public Pole(){
     }
     public void GenPole(){
         int currnt=stlbec;
-        JPanel pole_prehru = new JPanel();
+        this.vymazPoli();
+        System.out.println(currnt + " + " + riadok );
+        frame.remove(pole_prehru);
         pole_prehru.setLayout(new GridLayout(rozmer,rozmer));
+        pole_prehru.setBounds(currnt, 50, 42 * rozmer, 42 * rozmer);
         for ( x=0;x<rozmer;x++){
-            currnt=currnt+42 ;
+            currnt=currnt+42;
             riadok = 50;
             for (y=0;y<rozmer;y++){
-                poli=new JPanel();
+                poli=new Kamne(x, y, rozmer, riadok, currnt);
                 //JLabel tpoli =new JLabel(x+"."+y);
-                if((x==(rozmer/2)-1 && x==y)||(x==(rozmer/2) && x==y)){
-                    BufferedImage black = null;
-                    try {
-                        black = ImageIO.read(Objects.requireNonNull(Pole.class.getResourceAsStream("/imgo.png")));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    JLabel picLabel = new JLabel(new ImageIcon(black));
-                    poli.add(picLabel);
-                }
-                poli.setBounds(currnt,riadok,40,40);
-                poli.setBackground(new Color(236, 117, 46));
-                riadok=riadok+42;
-                //poli.add(tpoli);
                 poli.addMouseListener(this);
+
                 pole_prehru.add(poli);
-                frame.add(poli);
             }
             frame.repaint();
         }
+
+        frame.add(pole_prehru);
 //        for ( int i=0;i<pole.toArray().length;i++){
 //            System.out.println(pole);
 //        }
+    }
+
+    public void vymazPoli(){
+        for(Component c : pole_prehru.getComponents()){
+            pole_prehru.remove(c);
+        }
+
     }
 
     @Override
@@ -91,13 +88,5 @@ public class Pole extends Hra implements ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
-    }
-
-    public void setX(int x) {
-        this.x1 = x;
-    }
-
-    public void setY(int y) {
-        this.y1 = y;
     }
 }
