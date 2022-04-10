@@ -1,9 +1,13 @@
 package sk.stuba.fei.uim.oop.okno;
+import sk.stuba.fei.uim.oop.hrac.Hrac;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class Okno extends Pole {
+    public int kolkoHrac;
+    public int kolkoPocitac;
 
     public Okno(){
         final JTextField tf=new JTextField();
@@ -22,11 +26,11 @@ public class Okno extends Pole {
         l1.setForeground(new Color(236, 117, 46));
         l1.setBounds(50,100, 100,30);
 
-        JLabel hracma=new JLabel("Hrac ma :");
+        JLabel hracma=new JLabel("Hrac ma : "+kolkoHrac);
         hracma.setForeground(new Color(236, 117, 46));
         hracma.setBounds(50,135, 100,30);
 
-        JLabel pocitacma=new JLabel("Pocitac ma :");
+        JLabel pocitacma=new JLabel("Pocitac ma : "+kolkoPocitac);
         pocitacma.setForeground(new Color(236, 117, 46));
         pocitacma.setBounds(50,160, 100,30);
 

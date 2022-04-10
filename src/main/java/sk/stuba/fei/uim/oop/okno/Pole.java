@@ -1,16 +1,13 @@
 package sk.stuba.fei.uim.oop.okno;
 import sk.stuba.fei.uim.oop.hra.Hra;
+import sk.stuba.fei.uim.oop.hrac.Hrac;
+import sk.stuba.fei.uim.oop.pocitac.Pocitac;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Pole extends Hra implements ActionListener, MouseListener {
@@ -38,19 +35,17 @@ public class Pole extends Hra implements ActionListener, MouseListener {
             currnt=currnt+42;
             riadok = 50;
             for (y=0;y<rozmer;y++){
-                poli=new Kamne(x, y, rozmer, riadok, currnt);
-                //JLabel tpoli =new JLabel(x+"."+y);
+                poli=new Hrac(x, y, rozmer, riadok, currnt);
+                poli=new Pocitac(x, y, rozmer, riadok, currnt);
+                JLabel tpoli =new JLabel(x+"."+y);
                 poli.addMouseListener(this);
-
+                poli.add(tpoli);
                 pole_prehru.add(poli);
             }
             frame.repaint();
         }
 
         frame.add(pole_prehru);
-//        for ( int i=0;i<pole.toArray().length;i++){
-//            System.out.println(pole);
-//        }
     }
 
     public void vymazPoli(){
