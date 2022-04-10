@@ -6,8 +6,6 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Okno extends Pole {
-    public int kolkoHrac;
-    public int kolkoPocitac;
 
     public Okno(){
         final JTextField tf=new JTextField();

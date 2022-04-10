@@ -26,4 +26,8 @@ public class Kamne extends JPanel {
         JLabel picLabel = new JLabel(new ImageIcon(kamne));
         this.add(picLabel);
     }
+
+    public int getIndexHraca() {
+        return -1;
+    }
 }

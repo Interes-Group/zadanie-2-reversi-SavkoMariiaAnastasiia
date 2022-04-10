@@ -8,18 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
-public class Pole extends Hra implements ActionListener, MouseListener {
+public class Pole {
     public void setRozmer(int rozmer) {
         this.rozmer = rozmer;
     }
     JFrame frame=new JFrame("Reverse");
     public int rozmer = 6;
-    public int stlbec = 250;
-    public int riadok = 50;
-    public int x;
-    public int y;
+    private int stlbec = 250;
+    private int riadok = 50;
+    public int x,y;
+    public int kolkoHrac=0;
+    public int kolkoPocitac=0;
     Kamne poli;
     JPanel pole_prehru = new JPanel();
     public Pole(){
@@ -35,10 +37,15 @@ public class Pole extends Hra implements ActionListener, MouseListener {
             currnt=currnt+42;
             riadok = 50;
             for (y=0;y<rozmer;y++){
-                poli=new Hrac(x, y, rozmer, riadok, currnt);
-                poli=new Pocitac(x, y, rozmer, riadok, currnt);
+
+                if((x==(rozmer/2)-1 && x==y)||(x==(rozmer/2) && x==y)) {
+                    poli=new Hrac(x, y, rozmer, riadok, currnt, this);
+                }  else if((x==(rozmer/2)-1 && y==x+1)||(x==(rozmer/2) && y==x-1)) {
+                    poli=new Pocitac(x, y, rozmer, riadok, currnt, this);
+                } else {
+                    poli=new Kamne();
+                }
                 JLabel tpoli =new JLabel(x+"."+y);
-                poli.addMouseListener(this);
                 poli.add(tpoli);
                 pole_prehru.add(poli);
             }
@@ -46,6 +53,7 @@ public class Pole extends Hra implements ActionListener, MouseListener {
         }
 
         frame.add(pole_prehru);
+        this.najdiAktivnePoli(0);
     }
 
     public void vymazPoli(){
@@ -55,33 +63,74 @@ public class Pole extends Hra implements ActionListener, MouseListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+    private ArrayList<Hrac> najdiPoliHraca(int hrac) {
+
+        ArrayList<Hrac> kamene = new ArrayList<>();
+
+        for (int x = 0; x < this.rozmer; x++) {
+
+            for (int y = 0; y < rozmer; y++) {
+
+                Kamne poli = (Kamne) pole_prehru.getComponent(x + y * rozmer);
+
+                if(poli.getIndexHraca() == hrac) {
+
+                   kamene.add((Hrac) poli);
+
+                }
+
+            }
+
+        }
+
+        return kamene;
+
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getLocationOnScreen()+""+x+"."+y);
+    private ArrayList<Hrac> najdiSuperovePoli(ArrayList<Hrac> kamene, int protivnik) {
+
+        ArrayList<Hrac> protivnikKamene = new ArrayList<>();
+
+        for(Hrac kamen : kamene) {
+
+            int x = kamen.x;
+            int y = kamen.y;
+
+            int xmin = x - 1;
+            int xmax = x + 2;
+            int ymin = y - 1;
+            int ymax = y + 2;
+
+            for (int x1 = xmin; x1 < xmax; x1++) {
+                for (int y1 = ymin; y1 < ymax; y1++) {
+
+                    if(x1 == x && y1 == y) {
+                        continue;
+                    }
+
+                    Kamne pkamen = (Kamne) pole_prehru.getComponent(x1 + y1 * rozmer);
+
+                    if(pkamen.getIndexHraca() == protivnik) {
+                        System.out.println("X: " + x1 + " Y: " + y1);
+                        protivnikKamene.add((Hrac) pkamen);
+                    }
+
+                }
+            }
+
+
+        }
+
+        return protivnikKamene;
+
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+    public void najdiAktivnePoli(int hrac) {
 
-    }
+        ArrayList<Hrac> kamene = najdiPoliHraca(hrac);
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
+        this.najdiSuperovePoli(kamene, 1 - hrac);
 
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
 
     }
 }
