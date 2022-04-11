@@ -11,7 +11,13 @@ public class Kamne extends JPanel {
 
     public String i;
 
-    public Kamne () {
+    public int x, y;
+
+    public Kamne (int x, int y) {
+
+        this.x = x;
+        this.y = y;
+        this.addMouseListener(new Adapter(this));
 
         this.setBackground(new Color(236, 117, 46));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

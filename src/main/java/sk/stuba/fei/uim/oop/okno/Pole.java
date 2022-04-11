@@ -43,7 +43,7 @@ public class Pole {
                 }  else if((x==(rozmer/2)-1 && y==x+1)||(x==(rozmer/2) && y==x-1)) {
                     poli=new Pocitac(x, y, rozmer, riadok, currnt, this);
                 } else {
-                    poli=new Kamne();
+                    poli=new Kamne(x, y);
                 }
                 JLabel tpoli =new JLabel(x+"."+y);
                 poli.add(tpoli);
@@ -53,7 +53,7 @@ public class Pole {
         }
 
         frame.add(pole_prehru);
-        this.najdiAktivnePoli(0);
+        this.oznacAktivnePoli(0);
     }
 
     public void vymazPoli(){
@@ -71,7 +71,7 @@ public class Pole {
 
             for (int y = 0; y < rozmer; y++) {
 
-                Kamne poli = (Kamne) pole_prehru.getComponent(x + y * rozmer);
+                Kamne poli = (Kamne) pole_prehru.getComponent(y + x * rozmer);
 
                 if(poli.getIndexHraca() == hrac) {
 
@@ -87,9 +87,9 @@ public class Pole {
 
     }
 
-    private ArrayList<Hrac> najdiSuperovePoli(ArrayList<Hrac> kamene, int protivnik) {
+    private ArrayList<Kamne> najdiAktivnePoli(ArrayList<Hrac> kamene, int protivnik) {
 
-        ArrayList<Hrac> protivnikKamene = new ArrayList<>();
+        ArrayList<Kamne> aktivneKamene = new ArrayList<>();
 
         for(Hrac kamen : kamene) {
 
@@ -108,28 +108,62 @@ public class Pole {
                         continue;
                     }
 
-                    Kamne pkamen = (Kamne) pole_prehru.getComponent(x1 + y1 * rozmer);
+                    Kamne pkamen = (Kamne) pole_prehru.getComponent(y1 + x1 * rozmer);
 
                     if(pkamen.getIndexHraca() == protivnik) {
-                        System.out.println("X: " + x1 + " Y: " + y1);
-                        protivnikKamene.add((Hrac) pkamen);
+
+
+                        pkamen = this.najdiDalsiePoli(pkamen, x1 - x, y1 - y);
+
+                        if(pkamen != null) {
+                            aktivneKamene.add(pkamen);
+                        }
+
                     }
 
                 }
             }
 
-
         }
 
-        return protivnikKamene;
+        return aktivneKamene;
 
     }
 
-    public void najdiAktivnePoli(int hrac) {
+    public Kamne najdiDalsiePoli(Kamne zaciatok, int x1, int y1) {
+
+        Hrac hkamen = (Hrac) zaciatok;
+
+        int x = hkamen.x;
+        int y = hkamen.y;
+
+        int x2 = x + x1;
+        int y2 = y + y1;
+
+        Kamne kamen = (Kamne) pole_prehru.getComponent(x2 + y2 * rozmer);
+
+        if(kamen.getIndexHraca() == -1) {
+            return kamen;
+        }
+
+        if(kamen.getIndexHraca() != zaciatok.getIndexHraca()) {
+            return null;
+        }
+
+        return this.najdiDalsiePoli(kamen, x2 - x, y2 - y);
+
+    }
+
+    public void oznacAktivnePoli(int hrac) {
 
         ArrayList<Hrac> kamene = najdiPoliHraca(hrac);
 
-        this.najdiSuperovePoli(kamene, 1 - hrac);
+        ArrayList<Kamne> poli = this.najdiAktivnePoli(kamene, 1 - hrac);
+
+        for(Kamne kamen : poli) {
+            System.out.println("X: " + kamen.x + " Y: " + kamen.y);
+        }
+
 
 
     }
