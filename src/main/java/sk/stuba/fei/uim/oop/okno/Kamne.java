@@ -12,13 +12,16 @@ public class Kamne extends JPanel {
     public String i;
 
     public int x, y;
+    public boolean activpole=false;
 
-    public Kamne (int x, int y) {
+    public boolean getIndexPole() {
+        return activpole;
+    }
+    public Kamne (int x, int y,Pole pole) {
 
         this.x = x;
         this.y = y;
-        this.addMouseListener(new Adapter(this));
-
+        this.addMouseListener(new Adapter(this,pole));
         this.setBackground(new Color(236, 117, 46));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
@@ -31,6 +34,16 @@ public class Kamne extends JPanel {
         }
         JLabel picLabel = new JLabel(new ImageIcon(kamne));
         this.add(picLabel);
+
+    }
+
+    public void setActivpole (boolean activpole){
+        this.activpole = activpole;
+        if(getIndexPole()==true){
+            this.setBackground(new Color(246, 175, 128));
+        }else {
+            this.setBackground(new Color(236, 117, 46));
+        }
     }
 
     public int getIndexHraca() {

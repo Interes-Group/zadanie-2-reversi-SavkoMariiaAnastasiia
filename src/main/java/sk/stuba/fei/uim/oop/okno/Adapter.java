@@ -5,9 +5,11 @@ import java.awt.event.*;
 public class Adapter implements ActionListener, MouseListener {
 
     private Kamne policko;
+    private Pole pole;
 
-    public Adapter(Kamne poli) {
+    public Adapter(Kamne poli, Pole pole) {
         this.policko = poli;
+        this.pole = pole;
     }
 
     @Override
@@ -18,6 +20,7 @@ public class Adapter implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
+        pole.oznacNieaktivPole();
     }
 
     @Override

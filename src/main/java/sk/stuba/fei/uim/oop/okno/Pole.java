@@ -1,13 +1,8 @@
 package sk.stuba.fei.uim.oop.okno;
-import sk.stuba.fei.uim.oop.hra.Hra;
 import sk.stuba.fei.uim.oop.hrac.Hrac;
 import sk.stuba.fei.uim.oop.pocitac.Pocitac;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -19,9 +14,10 @@ public class Pole {
     public int rozmer = 6;
     private int stlbec = 250;
     private int riadok = 50;
-    public int x,y;
+    public int y, x;
     public int kolkoHrac=0;
     public int kolkoPocitac=0;
+
     Kamne poli;
     JPanel pole_prehru = new JPanel();
     public Pole(){
@@ -33,19 +29,19 @@ public class Pole {
         frame.remove(pole_prehru);
         pole_prehru.setLayout(new GridLayout(rozmer,rozmer));
         pole_prehru.setBounds(currnt, 50, 42 * rozmer, 42 * rozmer);
-        for ( x=0;x<rozmer;x++){
+        for (y =0; y <rozmer; y++){
             currnt=currnt+42;
             riadok = 50;
-            for (y=0;y<rozmer;y++){
+            for (x =0; x <rozmer; x++){
 
-                if((x==(rozmer/2)-1 && x==y)||(x==(rozmer/2) && x==y)) {
+                if((y ==(rozmer/2)-1 && y == x)||(y ==(rozmer/2) && y == x)) {
                     poli=new Hrac(x, y, rozmer, riadok, currnt, this);
-                }  else if((x==(rozmer/2)-1 && y==x+1)||(x==(rozmer/2) && y==x-1)) {
+                }  else if((y ==(rozmer/2)-1 && x == y +1)||(y ==(rozmer/2) && x == y -1)) {
                     poli=new Pocitac(x, y, rozmer, riadok, currnt, this);
                 } else {
-                    poli=new Kamne(x, y);
+                    poli=new Kamne(x, y,this);
                 }
-                JLabel tpoli =new JLabel(x+"."+y);
+                JLabel tpoli =new JLabel(x +"."+ y);
                 poli.add(tpoli);
                 pole_prehru.add(poli);
             }
@@ -71,7 +67,7 @@ public class Pole {
 
             for (int y = 0; y < rozmer; y++) {
 
-                Kamne poli = (Kamne) pole_prehru.getComponent(y + x * rozmer);
+                Kamne poli = (Kamne) pole_prehru.getComponent(x + y * rozmer);
 
                 if(poli.getIndexHraca() == hrac) {
 
@@ -108,10 +104,9 @@ public class Pole {
                         continue;
                     }
 
-                    Kamne pkamen = (Kamne) pole_prehru.getComponent(y1 + x1 * rozmer);
+                    Kamne pkamen = (Kamne) pole_prehru.getComponent(x1 + y1 * rozmer);
 
                     if(pkamen.getIndexHraca() == protivnik) {
-
 
                         pkamen = this.najdiDalsiePoli(pkamen, x1 - x, y1 - y);
 
@@ -160,11 +155,19 @@ public class Pole {
 
         ArrayList<Kamne> poli = this.najdiAktivnePoli(kamene, 1 - hrac);
 
-        for(Kamne kamen : poli) {
-            System.out.println("X: " + kamen.x + " Y: " + kamen.y);
+        for(Kamne kamen : poli) {//vsetke pohibove policka
+            kamen.setActivpole(true);
         }
+    }
+    public void oznacNieaktivPole(){
+        for (int x = 0; x < this.rozmer; x++) {
+            for (int y = 0; y < rozmer; y++) {
+                Kamne poli = (Kamne) pole_prehru.getComponent(x + y * rozmer);
+                poli.setActivpole(false);
 
+            }
 
-
+        }
     }
 }
+
