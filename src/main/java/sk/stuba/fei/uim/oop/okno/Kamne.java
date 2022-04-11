@@ -46,6 +46,10 @@ public class Kamne extends JPanel {
         }
     }
 
+    public boolean isActivpole() {
+        return activpole;
+    }
+
     public int getIndexHraca() {
         return -1;
     }

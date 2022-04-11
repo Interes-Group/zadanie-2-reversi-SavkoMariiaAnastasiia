@@ -9,7 +9,7 @@ public class Hrac extends Kamne {
 
     protected Pole pole;
 
-    public Hrac(int x, int y, int rozmer, int riadok, int currnt, Pole pole) {
+    public Hrac(int x, int y, Pole pole) {
         super(x, y,pole);
         this.pole = pole;
         this.vykresliKamen();

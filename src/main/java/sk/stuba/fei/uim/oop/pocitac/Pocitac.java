@@ -4,8 +4,8 @@ import sk.stuba.fei.uim.oop.hrac.Hrac;
 import sk.stuba.fei.uim.oop.okno.Pole;
 
 public class Pocitac extends Hrac {
-    public Pocitac(int x, int y, int rozmer, int riadok, int currnt, Pole pole) {
-        super(x, y, rozmer, riadok, currnt, pole);
+    public Pocitac(int x, int y, Pole pole) {
+        super(x, y, pole);
     }
     @Override
     public int getIndexHraca() {

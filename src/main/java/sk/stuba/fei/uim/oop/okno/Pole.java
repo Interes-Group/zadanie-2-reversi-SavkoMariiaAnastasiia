@@ -35,9 +35,9 @@ public class Pole {
             for (x =0; x <rozmer; x++){
 
                 if((y ==(rozmer/2)-1 && y == x)||(y ==(rozmer/2) && y == x)) {
-                    poli=new Hrac(x, y, rozmer, riadok, currnt, this);
+                    poli=new Hrac(x, y, this);
                 }  else if((y ==(rozmer/2)-1 && x == y +1)||(y ==(rozmer/2) && x == y -1)) {
-                    poli=new Pocitac(x, y, rozmer, riadok, currnt, this);
+                    poli=new Pocitac(x, y, this);
                 } else {
                     poli=new Kamne(x, y,this);
                 }
@@ -56,6 +56,27 @@ public class Pole {
         for(Component c : pole_prehru.getComponents()){
             pole_prehru.remove(c);
         }
+
+    }
+
+    public void hrajHrac(Kamne policko) {
+
+        int x = policko.x;
+        int y = policko.y;
+        int n = x + y * this.rozmer;
+
+        this.pole_prehru.remove(n);//v pole zadat ze hra pocitac
+        this.pole_prehru.add(new Hrac(x, y, this), n);
+        this.pole_prehru.revalidate();
+        this.pole_prehru.repaint();
+
+        this.hrajPocitac();
+
+    }
+
+    public void hrajPocitac() {
+
+        this.oznacAktivnePoli(0);
 
     }
 

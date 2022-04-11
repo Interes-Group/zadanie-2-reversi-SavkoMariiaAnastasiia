@@ -1,5 +1,7 @@
 package sk.stuba.fei.uim.oop.okno;
 
+import sk.stuba.fei.uim.oop.hrac.Hrac;
+
 import java.awt.event.*;
 
 public class Adapter implements ActionListener, MouseListener {
@@ -20,7 +22,10 @@ public class Adapter implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
-        pole.oznacNieaktivPole();
+        if(policko.isActivpole()){
+            pole.oznacNieaktivPole();
+            pole.hrajHrac(policko);
+        }
     }
 
     @Override
