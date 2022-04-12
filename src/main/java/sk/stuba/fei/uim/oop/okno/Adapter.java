@@ -23,8 +23,9 @@ public class Adapter implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
         if(policko.isActivpole()){
-            pole.oznacNieaktivPole();
             pole.hrajHrac(policko);
+            pole.oznacNieaktivPole();
+            pole.hrajPocitac();
         }
     }
 

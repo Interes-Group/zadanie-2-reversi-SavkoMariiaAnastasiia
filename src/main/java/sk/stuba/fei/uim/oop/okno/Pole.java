@@ -25,7 +25,6 @@ public class Pole {
     public void GenPole(){
         int currnt=stlbec;
         this.vymazPoli();
-        System.out.println(currnt + " + " + riadok );
         frame.remove(pole_prehru);
         pole_prehru.setLayout(new GridLayout(rozmer,rozmer));
         pole_prehru.setBounds(currnt, 50, 42 * rozmer, 42 * rozmer);
@@ -65,12 +64,21 @@ public class Pole {
         int y = policko.y;
         int n = x + y * this.rozmer;
 
-        this.pole_prehru.remove(n);//v pole zadat ze hra pocitac
-        this.pole_prehru.add(new Hrac(x, y, this), n);
-        this.pole_prehru.revalidate();
-        this.pole_prehru.repaint();
+        int x1 = policko.zpolicka.x;
+        int y1 = policko.zpolicka.y;
 
-        this.hrajPocitac();
+        int x2 = x1 - x;
+        int y2 = y1 - y;
+
+        if(x2 != 0) {
+            x2 = x2 / Math.abs(x2);
+        }
+
+        if(y2 != 0) {
+            y2 = y2 / Math.abs(y2);
+        }
+
+        this.hracZoberPoli(policko, x2, y2);
 
     }
 
@@ -85,7 +93,6 @@ public class Pole {
         ArrayList<Hrac> kamene = new ArrayList<>();
 
         for (int x = 0; x < this.rozmer; x++) {
-
             for (int y = 0; y < rozmer; y++) {
 
                 Kamne poli = (Kamne) pole_prehru.getComponent(x + y * rozmer);
@@ -97,7 +104,6 @@ public class Pole {
                 }
 
             }
-
         }
 
         return kamene;
@@ -132,7 +138,35 @@ public class Pole {
                         pkamen = this.najdiDalsiePoli(pkamen, x1 - x, y1 - y);
 
                         if(pkamen != null) {
+
+                            int pocetKamenov = 0;
+
+                            int x2 = pkamen.x;
+                            int y2 = pkamen.y;
+
+                            if(x2 == x) {
+                                pocetKamenov = Math.abs(y - y2);
+                            } else {
+                                pocetKamenov = Math.abs(x - x2);
+                            }
+
+                            pocetKamenov--;
+
                             aktivneKamene.add(pkamen);
+
+                            if(pkamen.zpolicka == null) {
+                                pkamen.zpolicka = kamen;
+                                pkamen.pocetKamenov = pocetKamenov;
+                                continue;
+                            }
+
+                            if(pocetKamenov <= pkamen.pocetKamenov) {
+                                continue;
+                            }
+
+                            pkamen.zpolicka = kamen;
+                            pkamen.pocetKamenov = pocetKamenov;
+
                         }
 
                     }
@@ -166,7 +200,32 @@ public class Pole {
             return null;
         }
 
-        return this.najdiDalsiePoli(kamen, x2 - x, y2 - y);
+        return this.najdiDalsiePoli(kamen, x - x2, y - y2);
+
+    }
+
+    public void hracZoberPoli(Kamne zaciatok, int x1, int y1) {
+
+        int x = zaciatok.x;
+        int y = zaciatok.y;
+
+        int x2 = x + x1;
+        int y2 = y + y1;
+
+        Kamne kamen = (Kamne) pole_prehru.getComponent(x2 + y2 * rozmer);
+
+        int n = x2 + y2 * rozmer;
+
+        this.pole_prehru.remove(n);
+        this.pole_prehru.add(new Hrac(x2, y2, this), n);
+        this.pole_prehru.revalidate();
+        this.pole_prehru.repaint();
+
+        if(kamen.getIndexHraca() == -1) {
+            return;
+        }
+
+        this.hracZoberPoli(kamen, x - x2, y - y2);
 
     }
 

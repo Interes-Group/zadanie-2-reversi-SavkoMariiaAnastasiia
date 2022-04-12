@@ -14,13 +14,15 @@ public class Kamne extends JPanel {
     public int x, y;
     public boolean activpole=false;
 
-    public boolean getIndexPole() {
-        return activpole;
-    }
+    public Kamne zpolicka;
+    public int pocetKamenov;
+
     public Kamne (int x, int y,Pole pole) {
 
         this.x = x;
         this.y = y;
+        this.zpolicka = null;
+        this.pocetKamenov = 0;
         this.addMouseListener(new Adapter(this,pole));
         this.setBackground(new Color(236, 117, 46));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -39,15 +41,18 @@ public class Kamne extends JPanel {
 
     public void setActivpole (boolean activpole){
         this.activpole = activpole;
-        if(getIndexPole()==true){
+        if(isActivpole()){
             this.setBackground(new Color(246, 175, 128));
         }else {
+            this.zpolicka = null;
+            this.pocetKamenov = 0;
             this.setBackground(new Color(236, 117, 46));
         }
+        this.repaint();
     }
 
     public boolean isActivpole() {
-        return activpole;
+        return this.activpole;
     }
 
     public int getIndexHraca() {
