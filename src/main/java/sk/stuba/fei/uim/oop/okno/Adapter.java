@@ -9,6 +9,7 @@ public class Adapter implements ActionListener, MouseListener {
     private Kamne policko;
     private Pole pole;
 
+
     public Adapter(Kamne poli, Pole pole) {
         this.policko = poli;
         this.pole = pole;
@@ -22,10 +23,21 @@ public class Adapter implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
+        if (pole.tah==true){
         if(policko.isActivpole()){
             pole.hrajHrac(policko);
             pole.oznacNieaktivPole();
-            pole.hrajPocitac();
+            this.pole.tah=false;
+            pole.oznacAktivnePoli(1);
+        }
+        }else {
+            if(policko.isActivpole()){
+                pole.hrajPocitac(policko);
+                pole.oznacNieaktivPole();
+                this.pole.tah=true;
+                pole.oznacAktivnePoli(0);
+            }
+
         }
     }
 

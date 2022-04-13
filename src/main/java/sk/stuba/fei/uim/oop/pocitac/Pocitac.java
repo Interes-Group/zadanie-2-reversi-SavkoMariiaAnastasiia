@@ -6,6 +6,9 @@ import sk.stuba.fei.uim.oop.okno.Pole;
 public class Pocitac extends Hrac {
     public Pocitac(int x, int y, Pole pole) {
         super(x, y, pole);
+        this.pole = pole;
+        this.vykresliKamen();
+        this.zvysPocet();
     }
     @Override
     public int getIndexHraca() {
