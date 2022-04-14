@@ -10,7 +10,7 @@ public class Pole {
     public void setRozmer(int rozmer) {
         this.rozmer = rozmer;
     }
-    JFrame frame=new JFrame("Reverse");
+    public JFrame frame=new JFrame("Reverse");
     public int rozmer = 6;
     private int stlbec = 250;
     private int riadok = 50;
@@ -18,13 +18,13 @@ public class Pole {
     public int kolkoHrac=0;
     public int kolkoPocitac=0;
     public boolean tah=true;
-    Kamne najlepsie = null;
-    JLabel l1;
-    JLabel vin;
-    Kamne pkamen;
+    public Kamne najlepsie = null;
+    public JLabel l1;
+    public JLabel vin;
+    public Kamne pkamen;
 
-    Kamne poli;
-    JPanel pole_prehru = new JPanel();
+    public Kamne poli;
+    public JPanel pole_prehru = new JPanel();
     public Pole(){
     }
     public void GenPole(){
