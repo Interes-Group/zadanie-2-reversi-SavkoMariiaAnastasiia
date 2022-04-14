@@ -1,14 +1,11 @@
 package sk.stuba.fei.uim.oop.hrac;
 
-import sk.stuba.fei.uim.oop.okno.Adapter;
 import sk.stuba.fei.uim.oop.okno.Kamne;
 import sk.stuba.fei.uim.oop.okno.Pole;
 
 
 public class Hrac extends Kamne {
-
     protected Pole pole;
-
     public Hrac(int x, int y, Pole pole) {
         super(x, y,pole);
         this.pole = pole;

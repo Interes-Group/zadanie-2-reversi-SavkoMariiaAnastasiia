@@ -18,6 +18,7 @@ public class Pole {
     public int kolkoHrac=0;
     public int kolkoPocitac=0;
     public boolean tah=true;
+    JLabel l1;
 
     Kamne poli;
     JPanel pole_prehru = new JPanel();
@@ -41,8 +42,8 @@ public class Pole {
                 } else {
                     poli=new Kamne(x, y,this);
                 }
-                JLabel tpoli =new JLabel(x +"."+ y);
-                poli.add(tpoli);
+                //JLabel tpoli =new JLabel(x +"."+ y);
+               // poli.add(tpoli);
                 pole_prehru.add(poli);
             }
             frame.repaint();
@@ -257,10 +258,13 @@ public class Pole {
 
         Kamne kamen = (Kamne) pole_prehru.getComponent(index);
 
-        int n = x2 + y2 * rozmer;
+        if(kamen instanceof Pocitac) {
+            Pocitac p = (Pocitac) kamen;
+            p.znizPocetPocitac();
+        }
 
-        this.pole_prehru.remove(n);
-        this.pole_prehru.add(new Hrac(x2, y2, this), n);
+        this.pole_prehru.remove(index);
+        this.pole_prehru.add(new Hrac(x2, y2, this), index);
         this.pole_prehru.revalidate();
         this.pole_prehru.repaint();
 
@@ -326,15 +330,11 @@ public class Pole {
     }
 
     public void zmenPocetHrac(int pocet) {
-
         this.kolkoHrac += pocet;
-
-
-
     }
 
-    public void zvysPocitac() {
-
+    public void zmenPocetPocitac(int pocet1) {
+        this.kolkoPocitac += pocet1;
     }
 }
 

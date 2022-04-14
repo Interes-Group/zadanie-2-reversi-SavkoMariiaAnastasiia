@@ -25,7 +25,7 @@ public class Kamne extends JPanel {
         this.pocetKamenov = 0;
         this.addMouseListener(new Adapter(this,pole));
         this.setBackground(new Color(236, 117, 46));
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.setBorder(BorderFactory.createLineBorder(new Color(30, 30, 30)));
     }
     public void kamen(){
         BufferedImage kamne = null;

@@ -8,14 +8,25 @@ import javax.swing.*;
 public class Okno extends Pole {
 
     JLabel hracma;
+    JLabel pocitacma;
+
 
     public Okno(){
         final JTextField tf=new JTextField();
         tf.setBounds(50,50, 200,30);
 
-        hracma=new JLabel("Hrac ma : "+kolkoHrac);
+        hracma=new JLabel("Hrac cierny ma : "+kolkoHrac);
         hracma.setForeground(new Color(236, 117, 46));
-        hracma.setBounds(50,135, 100,30);
+        hracma.setBounds(50,135, 120,30);
+
+        pocitacma=new JLabel("Pocitac biely ma : "+kolkoPocitac);
+        pocitacma.setForeground(new Color(236, 117, 46));
+        pocitacma.setBounds(50,160, 120,30);
+
+
+        l1=new JLabel("Chodi : Hrac cierny");
+        l1.setForeground(new Color(236, 117, 46));
+        l1.setBounds(50,100, 120,30);
 
         this.GenPole();
 
@@ -26,14 +37,6 @@ public class Okno extends Pole {
         JButton button=new JButton("Reset");
         button.setBounds(50,50,95,30);
         button.setBackground(new Color(236, 117, 46));
-
-        JLabel l1=new JLabel("Chodi :");
-        l1.setForeground(new Color(236, 117, 46));
-        l1.setBounds(50,100, 100,30);
-
-        JLabel pocitacma=new JLabel("Pocitac ma : "+kolkoPocitac);
-        pocitacma.setForeground(new Color(236, 117, 46));
-        pocitacma.setBounds(50,160, 100,30);
 
         JLabel l2=new JLabel("Rozmer:  6");
         l2.setForeground(new Color(236, 117, 46));
@@ -87,7 +90,12 @@ public class Okno extends Pole {
     @Override
     public void zmenPocetHrac(int pocet) {
         super.zmenPocetHrac(pocet);
-        this.hracma.setText("Hrac ma : "+kolkoHrac);
+        this.hracma.setText("Hrac cierny ma : "+kolkoHrac);
+    }
+    @Override
+    public void zmenPocetPocitac(int pocet1) {
+        super.zmenPocetPocitac(pocet1);
+        this.pocitacma.setText("Pocitac biely ma : "+kolkoPocitac);
     }
 
 }

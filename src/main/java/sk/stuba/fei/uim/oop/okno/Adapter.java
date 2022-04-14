@@ -24,6 +24,7 @@ public class Adapter implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
         if (pole.tah==true){
+            this.pole.l1.setText("Chodi : Pocitac biely");
         if(policko.isActivpole()){
             pole.hrajHrac(policko);
             pole.oznacNieaktivPole();
@@ -31,6 +32,7 @@ public class Adapter implements ActionListener, MouseListener {
             pole.oznacAktivnePoli(1);
         }
         }else {
+            this.pole.l1.setText("Chodi : Hrac cierny");
             if(policko.isActivpole()){
                 pole.hrajPocitac(policko);
                 pole.oznacNieaktivPole();
