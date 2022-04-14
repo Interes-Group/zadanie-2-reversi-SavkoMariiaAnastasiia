@@ -18,7 +18,10 @@ public class Pole {
     public int kolkoHrac=0;
     public int kolkoPocitac=0;
     public boolean tah=true;
+    Kamne najlepsie = null;
     JLabel l1;
+    JLabel vin;
+    Kamne pkamen;
 
     Kamne poli;
     JPanel pole_prehru = new JPanel();
@@ -43,7 +46,7 @@ public class Pole {
                     poli=new Kamne(x, y,this);
                 }
                 //JLabel tpoli =new JLabel(x +"."+ y);
-               // poli.add(tpoli);
+                // poli.add(tpoli);
                 pole_prehru.add(poli);
             }
             frame.repaint();
@@ -130,7 +133,7 @@ public class Pole {
 
                 if(poli.getIndexHraca() == hrac) {
 
-                   kamene.add((Hrac) poli);
+                    kamene.add((Hrac) poli);
 
                 }
 
@@ -166,7 +169,7 @@ public class Pole {
                         continue;
                     }
 
-                    Kamne pkamen = (Kamne) pole_prehru.getComponent(x1 + y1 * rozmer);
+                    pkamen = (Kamne) pole_prehru.getComponent(x1 + y1 * rozmer);
 
                     if(pkamen.getIndexHraca() == protivnik) {
 
@@ -190,8 +193,8 @@ public class Pole {
                             aktivneKamene.add(pkamen);
 
                             if(pkamen.zpolicka == null) {
-                                pkamen.zpolicka = kamen;
-                                pkamen.pocetKamenov = pocetKamenov;
+                                this.pkamen.zpolicka = kamen;
+                                this.pkamen.pocetKamenov = pocetKamenov;
                                 continue;
                             }
 
@@ -199,8 +202,9 @@ public class Pole {
                                 continue;
                             }
 
-                            pkamen.zpolicka = kamen;
-                            pkamen.pocetKamenov = pocetKamenov;
+                            this.pkamen.zpolicka = kamen;
+                            this.pkamen.pocetKamenov = pocetKamenov;
+
 
                         }
 
@@ -258,8 +262,8 @@ public class Pole {
 
         Kamne kamen = (Kamne) pole_prehru.getComponent(index);
 
-        if(kamen instanceof Pocitac) {
-            Pocitac p = (Pocitac) kamen;
+        if(kamen instanceof  Hrac) {
+            Hrac p = (Hrac) kamen;
             p.znizPocetPocitac();
         }
 
@@ -292,7 +296,7 @@ public class Pole {
 
         if(kamen instanceof Hrac) {
             Hrac h = (Hrac) kamen;
-            h.znizPocet();
+            h.znizPocetHrac();
         }
 
         this.pole_prehru.remove(n);
@@ -318,6 +322,32 @@ public class Pole {
             kamen.setActivpole(true);
         }
     }
+
+    public Kamne najdiNajlepsiePoli(int hrac) {
+
+        ArrayList<Hrac> kamene = najdiPoliHraca(hrac);
+
+        ArrayList<Kamne> poli = this.najdiAktivnePoli(kamene, 1 - hrac);
+
+        najlepsie = null;
+        int pocet = 0;
+
+        for (int x = 0; x < rozmer; x++) {
+            for (int y = 0; y < rozmer; y++) {
+                int n = x + y * rozmer;
+                Kamne policko = (Kamne) this.pole_prehru.getComponent(n);
+
+                if(policko.pocetKamenov > pocet) {
+                    this.najlepsie = policko;
+                    pocet = policko.pocetKamenov;
+                }
+            }
+        }
+
+        return this.najlepsie;
+
+    }
+
     public void oznacNieaktivPole(){
         for (int x = 0; x < this.rozmer; x++) {
             for (int y = 0; y < rozmer; y++) {
@@ -333,8 +363,8 @@ public class Pole {
         this.kolkoHrac += pocet;
     }
 
-    public void zmenPocetPocitac(int pocet1) {
-        this.kolkoPocitac += pocet1;
+    public void zmenPocetPocitac(int pocet) {
+        this.kolkoPocitac += pocet;
     }
 }
 

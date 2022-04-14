@@ -8,7 +8,6 @@ public class Pocitac extends Hrac {
         super(x, y, pole);
         this.pole = pole;
         this.vykresliKamen();
-        this.zvysPocetPocitac();
     }
     @Override
     public int getIndexHraca() {
@@ -22,11 +21,33 @@ public class Pocitac extends Hrac {
         kamen();
     }
 
-    protected void zvysPocetPocitac() {
+    @Override
+    public void zvysPocet() {
         this.pole.zmenPocetPocitac(1);
     }
 
-    public void znizPocetPocitac() {
+    @Override
+    protected void znizPocet() {
         this.pole.zmenPocetPocitac(-1);
+    }
+
+    @Override
+    public void zvysPocetHrac() {
+        return;
+    }
+
+    @Override
+    public void zvysPocetPocitac() {
+        this.zvysPocet();
+    }
+
+    @Override
+    public void znizPocetHrac() {
+        return;
+    }
+
+    @Override
+    public void znizPocetPocitac() {
+        this.znizPocet();
     }
 }

@@ -23,22 +23,27 @@ public class Adapter implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getLocationOnScreen()+""+policko.x+"."+policko.y);
-        if (pole.tah==true){
-            this.pole.l1.setText("Chodi : Pocitac biely");
-        if(policko.isActivpole()){
+
+        if(policko.isActivpole()) {
             pole.hrajHrac(policko);
             pole.oznacNieaktivPole();
-            this.pole.tah=false;
-            pole.oznacAktivnePoli(1);
-        }
-        }else {
-            this.pole.l1.setText("Chodi : Hrac cierny");
-            if(policko.isActivpole()){
-                pole.hrajPocitac(policko);
-                pole.oznacNieaktivPole();
-                this.pole.tah=true;
-                pole.oznacAktivnePoli(0);
+            this.pole.tah = false;
+            //pole.oznacAktivnePoli(1);
+            policko = pole.najdiNajlepsiePoli(1);
+            this.pole.l1.setText("Chodi : Pocitac biely");
+
+            pole.hrajPocitac(policko);
+            pole.oznacNieaktivPole();
+            this.pole.tah = true;
+            pole.oznacAktivnePoli(0);
+            if (pole.najlepsie==null){
+                if (pole.kolkoPocitac>pole.kolkoHrac||pole.kolkoPocitac+pole.kolkoHrac>= (pole.rozmer* pole.rozmer)-1){
+                    this.pole.vin.setText("Vyhral : Pocitac");
+                } else {
+                    this.pole.vin.setText("Vyhral : Hrac");
+                }
             }
+            this.pole.l1.setText("Chodi : Hrac cierny");
 
         }
     }

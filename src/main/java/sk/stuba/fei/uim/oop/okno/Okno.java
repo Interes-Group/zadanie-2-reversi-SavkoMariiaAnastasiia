@@ -28,6 +28,10 @@ public class Okno extends Pole {
         l1.setForeground(new Color(236, 117, 46));
         l1.setBounds(50,100, 120,30);
 
+        vin=new JLabel("Vyhral :");
+        vin.setForeground(new Color(236, 117, 46));
+        vin.setBounds(50,400, 100,30);
+
         this.GenPole();
 
         JPanel panel=new JPanel();
@@ -57,20 +61,17 @@ public class Okno extends Pole {
                 rozmer = k;
                 setRozmer(rozmer);
             }
-        });
+            });
         }
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 l2.setText("Rozmer:  " + rozmer);
+                kolkoHrac=0;
+                kolkoPocitac=0;
                 Okno.this.GenPole();
             }
         });
-
-        JLabel vin=new JLabel("Vyhral :");
-        vin.setForeground(new Color(236, 117, 46));
-        vin.setBounds(50,400, 100,30);
-
 
         frame.getContentPane().setBackground(new Color(30, 30, 30));
         frame.add(l1);

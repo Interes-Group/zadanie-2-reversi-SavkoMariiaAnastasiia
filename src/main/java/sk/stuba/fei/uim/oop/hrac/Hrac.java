@@ -27,7 +27,23 @@ public class Hrac extends Kamne {
         this.pole.zmenPocetHrac(1);
     }
 
-    public void znizPocet() {
+    protected void znizPocet() {
         this.pole.zmenPocetHrac(-1);
+    }
+
+    public void zvysPocetHrac() {
+        this.zvysPocet();
+    }
+
+    public void zvysPocetPocitac() {
+        return;
+    }
+
+    public void znizPocetHrac() {
+        this.znizPocet();
+    }
+
+    public void znizPocetPocitac() {
+        return;
     }
 }
