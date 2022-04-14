@@ -66,9 +66,12 @@ public class Pole {
 
         int x1 = policko.zpolicka.x;
         int y1 = policko.zpolicka.y;
+        int index = x1 + y1 * this.rozmer;
 
-        int x2 = x1 - x;
-        int y2 = y1 - y;
+        System.out.println("X1: " + x1 + "Y1:" + y1);
+
+        int x2 = x - x1;
+        int y2 = y - y1;
 
         if(x2 != 0) {
             x2 = x2 / Math.abs(x2);
@@ -78,22 +81,27 @@ public class Pole {
             y2 = y2 / Math.abs(y2);
         }
 
-        this.hracZoberPoli(policko, x2, y2);
+        Kamne kamen = (Kamne) this.pole_prehru.getComponent(index);
+
+        System.out.println("<" + x2 + ", " + y2 + ">");
+
+        this.hracZoberPoli(kamen, x2, y2);
 
     }
 
     public void hrajPocitac(Kamne policko) {
-        System.out.println("dfs");
 
         int x = policko.x;
         int y = policko.y;
-        int n = x + y * this.rozmer;
 
         int x1 = policko.zpolicka.x;
         int y1 = policko.zpolicka.y;
+        int index = x1 + y1 * this.rozmer;
 
-        int x2 = x1 - x;
-        int y2 = y1 - y;
+        System.out.println("X1: " + x1 + " Y1: " + y1);
+
+        int x2 = x - x1;
+        int y2 = y - y1;
 
         if(x2 != 0) {
             x2 = x2 / Math.abs(x2);
@@ -103,7 +111,9 @@ public class Pole {
             y2 = y2 / Math.abs(y2);
         }
 
-        this.pocitacZoberPoli(policko, x2, y2);
+        Kamne kamen = (Kamne) this.pole_prehru.getComponent(index);
+
+        this.pocitacZoberPoli(kamen, x2, y2);
 
 
     }
@@ -148,6 +158,10 @@ public class Pole {
                 for (int y1 = ymin; y1 < ymax; y1++) {
 
                     if(x1 == x && y1 == y) {
+                        continue;
+                    }
+
+                    if(x1<0||x1>=rozmer||y1<0||y1>=rozmer) {
                         continue;
                     }
 
@@ -210,10 +224,12 @@ public class Pole {
         int x2 = x + x1;
         int y2 = y + y1;
         if (x2<0||x2>=rozmer||y2<0||y2>=rozmer){
-            return zaciatok;
+            return null;
         }
 
-        Kamne kamen = (Kamne) pole_prehru.getComponent(x2 + y2 * rozmer);
+        int index = x2 + y2 * rozmer;
+
+        Kamne kamen = (Kamne) pole_prehru.getComponent(index);
 
         if(kamen.getIndexHraca() == -1) {
             return kamen;
@@ -223,7 +239,7 @@ public class Pole {
             return null;
         }
 
-        return this.najdiDalsiePoli(kamen, x - x2, y - y2);
+        return this.najdiDalsiePoli(kamen, x2 - x, y2 - y);
 
     }
 
@@ -232,10 +248,14 @@ public class Pole {
         int x = zaciatok.x;
         int y = zaciatok.y;
 
+        System.out.println("<" + x1 + ", " + y1 + ">");
+
         int x2 = x + x1;
         int y2 = y + y1;
 
-        Kamne kamen = (Kamne) pole_prehru.getComponent(x2 + y2 * rozmer);
+        int index = x2 + y2 * rozmer;
+
+        Kamne kamen = (Kamne) pole_prehru.getComponent(index);
 
         int n = x2 + y2 * rozmer;
 
@@ -245,10 +265,11 @@ public class Pole {
         this.pole_prehru.repaint();
 
         if(kamen.getIndexHraca() == -1) {
+            System.out.println("[" + x2 + ", " + y2 + "]");
             return;
         }
 
-        this.hracZoberPoli(kamen, x - x2, y - y2);
+        this.hracZoberPoli(kamen, x2 - x, y2 - y);
 
     }
     public void pocitacZoberPoli(Kamne zaciatok, int x1, int y1) {
@@ -256,12 +277,19 @@ public class Pole {
         int x = zaciatok.x;
         int y = zaciatok.y;
 
+        System.out.println("<" + x1 + ", " + y1 + ">");
+
         int x2 = x + x1;
         int y2 = y + y1;
 
-        Kamne kamen = (Kamne) pole_prehru.getComponent(x2 + y2 * rozmer);
-
         int n = x2 + y2 * rozmer;
+
+        Kamne kamen = (Kamne) pole_prehru.getComponent(n);
+
+        if(kamen instanceof Hrac) {
+            Hrac h = (Hrac) kamen;
+            h.znizPocet();
+        }
 
         this.pole_prehru.remove(n);
         this.pole_prehru.add(new Pocitac(x2, y2, this), n);
@@ -272,7 +300,7 @@ public class Pole {
             return;
         }
 
-        this.pocitacZoberPoli(kamen, x - x2, y - y2);
+        this.pocitacZoberPoli(kamen, x2 - x, y2 - y);
 
     }
 
@@ -295,6 +323,18 @@ public class Pole {
             }
 
         }
+    }
+
+    public void zmenPocetHrac(int pocet) {
+
+        this.kolkoHrac += pocet;
+
+
+
+    }
+
+    public void zvysPocitac() {
+
     }
 }
 

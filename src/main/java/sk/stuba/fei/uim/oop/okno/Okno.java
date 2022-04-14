@@ -7,9 +7,16 @@ import javax.swing.*;
 
 public class Okno extends Pole {
 
+    JLabel hracma;
+
     public Okno(){
         final JTextField tf=new JTextField();
         tf.setBounds(50,50, 200,30);
+
+        hracma=new JLabel("Hrac ma : "+kolkoHrac);
+        hracma.setForeground(new Color(236, 117, 46));
+        hracma.setBounds(50,135, 100,30);
+
         this.GenPole();
 
         JPanel panel=new JPanel();
@@ -23,10 +30,6 @@ public class Okno extends Pole {
         JLabel l1=new JLabel("Chodi :");
         l1.setForeground(new Color(236, 117, 46));
         l1.setBounds(50,100, 100,30);
-
-        JLabel hracma=new JLabel("Hrac ma : "+kolkoHrac);
-        hracma.setForeground(new Color(236, 117, 46));
-        hracma.setBounds(50,135, 100,30);
 
         JLabel pocitacma=new JLabel("Pocitac ma : "+kolkoPocitac);
         pocitacma.setForeground(new Color(236, 117, 46));
@@ -79,6 +82,12 @@ public class Okno extends Pole {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
+
+    @Override
+    public void zmenPocetHrac(int pocet) {
+        super.zmenPocetHrac(pocet);
+        this.hracma.setText("Hrac ma : "+kolkoHrac);
     }
 
 }
