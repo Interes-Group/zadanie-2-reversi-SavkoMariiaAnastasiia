@@ -4,7 +4,7 @@ import sk.stuba.fei.uim.oop.hrac.Hrac;
 
 import java.awt.event.*;
 
-public class Adapter implements ActionListener, MouseListener {
+public class Adapter implements ActionListener, MouseListener, KeyListener {
 
     private Kamne policko;
     private Pole pole;
@@ -27,23 +27,8 @@ public class Adapter implements ActionListener, MouseListener {
         if(policko.isActivpole()) {
             pole.hrajHrac(policko);
             pole.oznacNieaktivPole();
-            this.pole.tah = false;
             //pole.oznacAktivnePoli(1);
-            policko = pole.najdiNajlepsiePoli(1);
-            this.pole.l1.setText("Chodi : Pocitac biely");
-
-            pole.hrajPocitac(policko);
-            pole.oznacNieaktivPole();
-            this.pole.tah = true;
-            pole.oznacAktivnePoli(0);
-            if (pole.najlepsie==null){
-                if (pole.kolkoPocitac>pole.kolkoHrac||pole.kolkoPocitac+pole.kolkoHrac>= (pole.rozmer* pole.rozmer)-1){
-                    this.pole.vin.setText("Vyhral : Pocitac");
-                } else {
-                    this.pole.vin.setText("Vyhral : Hrac");
-                }
-            }
-            this.pole.l1.setText("Chodi : Hrac cierny");
+            pole.koloPocitac();
 
         }
     }
@@ -66,5 +51,20 @@ public class Adapter implements ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("////////////");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("_________");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("_________");
     }
 }

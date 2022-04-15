@@ -17,15 +17,19 @@ public class Pole {
     public int y, x;
     public int kolkoHrac=0;
     public int kolkoPocitac=0;
-    public boolean tah=true;
     public Kamne najlepsie = null;
     public JLabel l1;
     public JLabel vin;
     public Kamne pkamen;
 
+    public boolean tah_hrac = true;
+    public boolean tah_pocitac = true;
+
     public Kamne poli;
     public JPanel pole_prehru = new JPanel();
     public Pole(){
+        frame.setFocusable(true);
+        frame.addKeyListener(new Adapter(null,this));
     }
     public void GenPole(){
         int currnt=stlbec;
@@ -321,6 +325,22 @@ public class Pole {
         for(Kamne kamen : poli) {//vsetke pohibove policka
             kamen.setActivpole(true);
         }
+
+        this.tah_hrac = poli.size() > 0;
+
+        if(!this.tah_hrac) {
+
+            if(!this.tah_pocitac) {
+                if (kolkoPocitac>kolkoHrac){
+                    this.vin.setText("Vyhral : Pocitac");
+                } else {
+                    this.vin.setText("Vyhral : Hrac");
+                }
+                return;
+            }
+
+            this.koloPocitac();
+        }
     }
 
     public Kamne najdiNajlepsiePoli(int hrac) {
@@ -338,13 +358,15 @@ public class Pole {
                 Kamne policko = (Kamne) this.pole_prehru.getComponent(n);
 
                 if(policko.pocetKamenov > pocet) {
-                    this.najlepsie = policko;
+                    najlepsie = policko;
                     pocet = policko.pocetKamenov;
                 }
             }
         }
 
-        return this.najlepsie;
+        this.tah_pocitac = najlepsie != null;
+
+        return najlepsie;
 
     }
 
@@ -357,6 +379,36 @@ public class Pole {
             }
 
         }
+    }
+
+    public void koloPocitac() {
+
+        this.l1.setText("Chodi : Pocitac biely");
+        Kamne policko = this.najdiNajlepsiePoli(1);
+
+        if(!this.tah_pocitac) {
+
+            if(!this.tah_hrac) {
+                if (kolkoPocitac>kolkoHrac){
+                    this.vin.setText("Vyhral : Pocitac");
+                } else {
+                    this.vin.setText("Vyhral : Hrac");
+                }
+                return;
+            }
+
+            oznacNieaktivPole();
+            this.oznacAktivnePoli(0);
+            this.l1.setText("Chodi : Hrac cierny");
+            return;
+        }
+
+
+       hrajPocitac(policko);
+        oznacNieaktivPole();
+        this.oznacAktivnePoli(0);
+        this.l1.setText("Chodi : Hrac cierny");
+
     }
 
     public void zmenPocetHrac(int pocet) {

@@ -69,6 +69,7 @@ public class Okno extends Pole {
                 l2.setText("Rozmer:  " + rozmer);
                 kolkoHrac=0;
                 kolkoPocitac=0;
+                vin.setText("Vyhral : ");
                 Okno.this.GenPole();
             }
         });
