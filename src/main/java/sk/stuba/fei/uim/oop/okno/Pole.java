@@ -1,7 +1,7 @@
 package sk.stuba.fei.uim.oop.okno;
+import sk.stuba.fei.uim.oop.adaptery.AdapterHra;
 import sk.stuba.fei.uim.oop.hrac.Hrac;
 import sk.stuba.fei.uim.oop.pocitac.Pocitac;
-
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -12,24 +12,20 @@ public class Pole {
     }
     public JFrame frame=new JFrame("Reverse");
     public int rozmer = 6;
-    private int stlbec = 250;
-    private int riadok = 50;
+    private int stlbec = 250,riadok = 50;
     public int y, x;
-    public int kolkoHrac=0;
-    public int kolkoPocitac=0;
+    public int kolkoHrac=0,kolkoPocitac=0;
+    public boolean tah_hrac = true,tah_pocitac = true;
     public Kamne najlepsie = null;
-    public JLabel l1;
-    public JLabel vin;
-    public Kamne pkamen;
-
-    public boolean tah_hrac = true;
-    public boolean tah_pocitac = true;
-
-    public Kamne poli;
+    public Kamne pkamen,poli;
+    public JLabel l1, l2,vin;
     public JPanel pole_prehru = new JPanel();
+    private AdapterHra hra;
+
     public Pole(){
         frame.setFocusable(true);
-        frame.addKeyListener(new Adapter(null,this));
+        //hra = new AdapterHra(poli,this);
+        //frame.addKeyListener(hra);
     }
     public void GenPole(){
         int currnt=stlbec;
@@ -55,7 +51,8 @@ public class Pole {
             }
             frame.repaint();
         }
-
+        hra = new AdapterHra(poli,this);
+        frame.addKeyListener(hra);
         frame.add(pole_prehru);
         this.oznacAktivnePoli(0);
     }

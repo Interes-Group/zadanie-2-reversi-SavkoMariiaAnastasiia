@@ -1,7 +1,6 @@
 package sk.stuba.fei.uim.oop.okno;
-import sk.stuba.fei.uim.oop.hrac.Hrac;
+import sk.stuba.fei.uim.oop.adaptery.AdapterHra;
 
-import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -42,7 +41,7 @@ public class Okno extends Pole {
         button.setBounds(50,50,95,30);
         button.setBackground(new Color(236, 117, 46));
 
-        JLabel l2=new JLabel("Rozmer:  6");
+        l2=new JLabel("Rozmer:  6");
         l2.setForeground(new Color(236, 117, 46));
         l2.setBounds(50,220, 100,30);
 
@@ -54,25 +53,14 @@ public class Okno extends Pole {
             r1.setBounds(50,y,100,20);
             r1.setForeground(new Color(236, 117, 46));
             r1.setBackground(new Color(47, 40, 39));
+            r1.setActionCommand(k + "");
             frame.add(r1);
             y+=20;
             bg.add(r1);
-            r1.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
-                rozmer = k;
-                setRozmer(rozmer);
-            }
-            });
+            r1.addActionListener(new AdapterOkno(this));
         }
 
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                l2.setText("Rozmer:  " + rozmer);
-                kolkoHrac=0;
-                kolkoPocitac=0;
-                vin.setText("Vyhral : ");
-                Okno.this.GenPole();
-            }
-        });
+        button.addActionListener(new AdapterHra(poli,this));
 
         frame.getContentPane().setBackground(new Color(30, 30, 30));
         frame.add(l1);

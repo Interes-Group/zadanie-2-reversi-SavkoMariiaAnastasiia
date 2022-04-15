@@ -1,5 +1,7 @@
 package sk.stuba.fei.uim.oop.okno;
 
+import sk.stuba.fei.uim.oop.adaptery.AdapterHra;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +25,7 @@ public class Kamne extends JPanel {
         this.y = y;
         this.zpolicka = null;
         this.pocetKamenov = 0;
-        this.addMouseListener(new Adapter(this,pole));
+        this.addMouseListener(new AdapterHra(this,pole));
         this.setBackground(new Color(236, 117, 46));
         this.setBorder(BorderFactory.createLineBorder(new Color(30, 30, 30)));
     }
