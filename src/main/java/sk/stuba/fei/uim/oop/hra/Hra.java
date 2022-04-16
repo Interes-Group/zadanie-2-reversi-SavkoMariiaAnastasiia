@@ -3,7 +3,7 @@ import sk.stuba.fei.uim.oop.okno.Okno;
 
 public class Hra {
 
-    int hrac;
+    private int hrac;
 
     public Hra() {
 

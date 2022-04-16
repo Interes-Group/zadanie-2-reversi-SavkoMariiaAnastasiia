@@ -7,25 +7,48 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Pole {
-    public void setRozmer(int rozmer) {
-        this.rozmer = rozmer;
-    }
-    public JFrame frame=new JFrame("Reverse");
-    public int rozmer = 6;
+    protected JFrame frame=new JFrame("Reverse");
+    protected int rozmer = 6;
     private int stlbec = 250,riadok = 50;
-    public int y, x;
-    public int kolkoHrac=0,kolkoPocitac=0;
-    public boolean tah_hrac = true,tah_pocitac = true;
-    public Kamne najlepsie = null;
-    public Kamne pkamen,poli;
-    public JLabel l1, l2,vin;
-    public JPanel pole_prehru = new JPanel();
+    private int y, x;
+    protected int kolkoHrac=0,kolkoPocitac=0;
+    private boolean tah_hrac = true,tah_pocitac = true;
+    private Kamne najlepsie = null;
+    private Kamne pkamen,poli;
+    protected JLabel l1, l2,vin;
+    private JPanel pole_prehru = new JPanel();
     private AdapterHra hra;
 
     public Pole(){
         frame.setFocusable(true);
-        //hra = new AdapterHra(poli,this);
-        //frame.addKeyListener(hra);
+    }
+
+    public void setKolkoHrac(int kolkoHrac) {
+        this.kolkoHrac = kolkoHrac;
+    }
+
+    public void setKolkoPocitac(int kolkoPocitac) {
+        this.kolkoPocitac = kolkoPocitac;
+    }
+
+    public JLabel getL2() {
+        return l2;
+    }
+
+    public JLabel getVin() {
+        return vin;
+    }
+
+    public int getRozmer() {
+        return rozmer;
+    }
+
+    public Kamne getPoli() {
+        return poli;
+    }
+
+    public void setRozmer(int rozmer) {
+        this.rozmer = rozmer;
     }
     public void GenPole(){
         int currnt=stlbec;
@@ -45,8 +68,6 @@ public class Pole {
                 } else {
                     poli=new Kamne(x, y,this);
                 }
-                //JLabel tpoli =new JLabel(x +"."+ y);
-                // poli.add(tpoli);
                 pole_prehru.add(poli);
             }
             frame.repaint();
@@ -69,11 +90,9 @@ public class Pole {
         int y = policko.y;
         int n = x + y * this.rozmer;
 
-        int x1 = policko.zpolicka.x;
-        int y1 = policko.zpolicka.y;
+        int x1 = policko.getZpolicka().x;
+        int y1 = policko.getZpolicka().y;
         int index = x1 + y1 * this.rozmer;
-
-        System.out.println("X1: " + x1 + "Y1:" + y1);
 
         int x2 = x - x1;
         int y2 = y - y1;
@@ -88,8 +107,6 @@ public class Pole {
 
         Kamne kamen = (Kamne) this.pole_prehru.getComponent(index);
 
-        System.out.println("<" + x2 + ", " + y2 + ">");
-
         this.hracZoberPoli(kamen, x2, y2);
 
     }
@@ -99,11 +116,9 @@ public class Pole {
         int x = policko.x;
         int y = policko.y;
 
-        int x1 = policko.zpolicka.x;
-        int y1 = policko.zpolicka.y;
+        int x1 = policko.getZpolicka().x;
+        int y1 = policko.getZpolicka().y;
         int index = x1 + y1 * this.rozmer;
-
-        System.out.println("X1: " + x1 + " Y1: " + y1);
 
         int x2 = x - x1;
         int y2 = y - y1;
@@ -193,7 +208,7 @@ public class Pole {
 
                             aktivneKamene.add(pkamen);
 
-                            if(pkamen.zpolicka == null) {
+                            if(pkamen.getZpolicka() == null) {
                                 this.pkamen.zpolicka = kamen;
                                 this.pkamen.pocetKamenov = pocetKamenov;
                                 continue;
@@ -254,8 +269,6 @@ public class Pole {
         int x = zaciatok.x;
         int y = zaciatok.y;
 
-        System.out.println("<" + x1 + ", " + y1 + ">");
-
         int x2 = x + x1;
         int y2 = y + y1;
 
@@ -274,7 +287,6 @@ public class Pole {
         this.pole_prehru.repaint();
 
         if(kamen.getIndexHraca() == -1) {
-            System.out.println("[" + x2 + ", " + y2 + "]");
             return;
         }
 
@@ -285,8 +297,6 @@ public class Pole {
 
         int x = zaciatok.x;
         int y = zaciatok.y;
-
-        System.out.println("<" + x1 + ", " + y1 + ">");
 
         int x2 = x + x1;
         int y2 = y + y1;

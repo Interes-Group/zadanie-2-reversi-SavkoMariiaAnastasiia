@@ -1,13 +1,14 @@
 package sk.stuba.fei.uim.oop.okno;
 import sk.stuba.fei.uim.oop.adaptery.AdapterHra;
+import sk.stuba.fei.uim.oop.adaptery.AdapterOkno;
 
 import java.awt.*;
 import javax.swing.*;
 
 public class Okno extends Pole {
 
-    public JLabel hracma;
-    public JLabel pocitacma;
+    private JLabel hracma;
+    private JLabel pocitacma;
 
 
     public Okno(){
@@ -81,7 +82,7 @@ public class Okno extends Pole {
             r1.addActionListener(new AdapterOkno(this));
         }
 
-        button.addActionListener(new AdapterHra(poli,this));
+        button.addActionListener(new AdapterHra(getPoli(),this));
 
         frame.getContentPane().setBackground(new Color(30, 30, 30));
         frame.add(l1);

@@ -11,15 +11,17 @@ import java.util.Objects;
 
 public class Kamne extends JPanel {
 
-    public String i;
-
-    public int x, y;
-    public boolean activpole=false;
-
+    protected String i;
+    protected int x, y;
+    private boolean activpole=false;
     public Kamne zpolicka;
-    public int pocetKamenov;
+    protected int pocetKamenov;
 
-    public Kamne (int x, int y,Pole pole) {
+    public Kamne getZpolicka() {
+        return zpolicka;
+    }
+
+    public Kamne (int x, int y, Pole pole) {
 
         this.x = x;
         this.y = y;

@@ -1,12 +1,10 @@
-package sk.stuba.fei.uim.oop.okno;
+package sk.stuba.fei.uim.oop.adaptery;
 
+import sk.stuba.fei.uim.oop.okno.Okno;
 import java.awt.event.*;
 
 public class AdapterOkno implements ActionListener {
     private Okno okno;
-    public AdapterOkno() {
-
-    }
     public AdapterOkno(Okno okno)
     {
         this.okno = okno;
