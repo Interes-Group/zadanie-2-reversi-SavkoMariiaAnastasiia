@@ -329,7 +329,7 @@ public class Pole {
 
         ArrayList<Kamne> poli = this.najdiAktivnePoli(kamene, 1 - hrac);
 
-        for(Kamne kamen : poli) {//vsetke pohibove policka
+        for(Kamne kamen : poli) {
             kamen.setActivpole(true);
         }
 
