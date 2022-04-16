@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class Okno extends Pole {
 
-    JLabel hracma;
-    JLabel pocitacma;
+    public JLabel hracma;
+    public JLabel pocitacma;
 
 
     public Okno(){
@@ -29,7 +29,7 @@ public class Okno extends Pole {
 
         vin=new JLabel("Vyhral :");
         vin.setForeground(new Color(236, 117, 46));
-        vin.setBounds(50,400, 100,30);
+        vin.setBounds(50,470, 100,30);
 
         this.GenPole();
 
@@ -44,6 +44,27 @@ public class Okno extends Pole {
         l2=new JLabel("Rozmer:  6");
         l2.setForeground(new Color(236, 117, 46));
         l2.setBounds(50,220, 100,30);
+
+        JLabel l3=new JLabel("2.Aby zatvorit okno stlac - esc");
+        l3.setForeground(new Color(236, 117, 46));
+        l3.setBounds(50,400, 170,30);
+
+        JLabel l4=new JLabel("3.Aby restartovat hru stlac - r");
+        l4.setForeground(new Color(236, 117, 46));
+        l4.setBounds(50,430, 170,30);
+
+        JLabel l5=new JLabel("1.Aby zmenit rozmer, vyber");
+        l5.setForeground(new Color(236, 117, 46));
+        l5.setBounds(50,350, 170,30);
+
+        JLabel l6=new JLabel("  aky rozmer a stlac Reset");
+        l6.setForeground(new Color(236, 117, 46));
+        l6.setBounds(50,370, 170,30);
+
+        JLabel l7=new JLabel("//////////////////////////////"+
+                "/////////////////////////");
+        l7.setForeground(new Color(236, 117, 46));
+        l7.setBounds(50,530, 200,30);
 
         ButtonGroup bg=new ButtonGroup();
         int y=250;
@@ -67,6 +88,11 @@ public class Okno extends Pole {
         frame.add(hracma);
         frame.add(pocitacma);
         frame.add(l2);
+        frame.add(l3);
+        frame.add(l4);
+        frame.add(l5);
+        frame.add(l6);
+        frame.add(l7);
         frame.add(button);
         frame.add(vin);
         frame.add(panel);
