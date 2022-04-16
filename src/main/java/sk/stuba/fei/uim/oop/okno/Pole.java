@@ -49,11 +49,15 @@ public class Pole {
 
     public void setRozmer(int rozmer) {
         this.rozmer = rozmer;
+        frame.setFocusable(true);
+        this.frame.requestFocusInWindow();
     }
     public void GenPole(){
         int currnt=stlbec;
         this.vymazPoli();
         frame.remove(pole_prehru);
+        frame.setFocusable(true);
+        this.frame.requestFocusInWindow();
         pole_prehru.setLayout(new GridLayout(rozmer,rozmer));
         pole_prehru.setBounds(currnt, 50, 42 * rozmer, 42 * rozmer);
         for (y =0; y <rozmer; y++){
@@ -209,7 +213,7 @@ public class Pole {
                             aktivneKamene.add(pkamen);
 
                             if(pkamen.getZpolicka() == null) {
-                                this.pkamen.zpolicka = kamen;
+                                this.pkamen.setZpolicka(kamen);
                                 this.pkamen.pocetKamenov = pocetKamenov;
                                 continue;
                             }
@@ -218,7 +222,7 @@ public class Pole {
                                 continue;
                             }
 
-                            this.pkamen.zpolicka = kamen;
+                            this.pkamen.setZpolicka(kamen);
                             this.pkamen.pocetKamenov = pocetKamenov;
 
 

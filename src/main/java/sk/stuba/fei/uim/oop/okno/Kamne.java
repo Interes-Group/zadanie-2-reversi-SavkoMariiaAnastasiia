@@ -14,11 +14,15 @@ public class Kamne extends JPanel {
     protected String i;
     protected int x, y;
     private boolean activpole=false;
-    public Kamne zpolicka;
+    private Kamne zpolicka;
     protected int pocetKamenov;
 
     public Kamne getZpolicka() {
         return zpolicka;
+    }
+
+    public void setZpolicka(Kamne zpolicka) {
+        this.zpolicka = zpolicka;
     }
 
     public Kamne (int x, int y, Pole pole) {
